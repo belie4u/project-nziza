@@ -1,0 +1,86 @@
+
+
+{% load display_tags %}
+{% load i18n %}
+{% load image_tags %}
+{% load reviews_tags %}
+{% load custom_filters %}
+
+
+
+
+
+<div class="col-md-3 col-6">
+    <div class="product product-slideup-content">
+        <figure class="product-media">
+            <a href="{{product.get_absolute_url}}">
+                {% with image=product.primary_image %}
+                {% oscar_thumbnail image.original "295x335" upscale=False as thumb %}
+                <img src="{{ thumb.url }}" alt="Product" width="295" height="335">
+                {% endwith %}
+            </a>
+            <div class="product-label-group">
+                <label class="product-label label-discount">-25%</label>
+            </div>
+            <div class="product-action-vertical">
+                <a href="#" class="btn-product-icon btn-quickview w-icon-search" title="Quick View"></a>
+            </div>
+        </figure>
+        <div class="product-details">
+            {% with category=product.get_categories.first %}
+            {% with last_category=category.get_ancestors_and_self|last %}
+            <div class="product-cat">
+                <a href="shop-banner-sidebar.html">{{last_category.name}}</a>
+            </div>
+            {% endwith %}
+            {% endwith %}
+            <h3 class="product-name">
+                <a href="{{product.get_absolute_url}}">{{ product.get_title|truncatewords:4 }}</a>
+            </h3>
+            <div class="ratings-container">
+                <div class="ratings-full">
+                    <span class="ratings"
+                        style="width: {% if product.rating is not None %}{{ product.rating|default:0|floatformat:1|add:'0'|floatformat|multiply:20 }}%{% else %}0%{% endif %};">
+
+                    </span>
+                    <span class="tooltiptext tooltip-top"></span>
+                </div>
+                <a href="{{product.get_absolute_url}}" class="rating-reviews">
+                    {% if product.rating != None %}
+                    {{ product.rating|default:0|floatformat:0 }} on {{ product.num_approved_reviews|default:0 }} reviews
+                    {% else %}
+                    0 reviews
+                    {% endif %}
+                </a>
+            </div>
+            <div class="product-card__rating">
+                <div class="rating product-card__rating-stars">
+                    <div class="rating__body">
+                        {% if product.rating != None %}
+                        {% for _ in product.rating|default:0|get_range %}
+                        <div class="rating__star rating__star--active"></div>
+                        {% endfor %}
+                        {% for _ in product.rating|default:0|get_range:5 %}
+                        <div class="rating__star"></div>
+                        {% endfor %}
+                        {% else %}
+                        {% for _ in "x"|rjust:5 %}
+                        <div class="rating__star"></div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="product-card__rating-label">
+                    {% include "oscar/catalogue/partials/availability.html" %}
+                </div>
+            </div>
+            <div class="product-price">
+                {% include "oscar/catalogue/partials/stock_record.html" %}
+                <!-- <del class="old-price">$30.45</del> -->
+            </div>
+        </div>
+        <div class="product-hidden-details">
+            {% include "oscar/catalogue/partials//add_to_basket_form_compact.html" %}
+        </div>
+    </div>
+</div>

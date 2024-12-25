@@ -1,0 +1,2 @@
+* customizing the payment_detail template to show all the order details
+* multi vendor 

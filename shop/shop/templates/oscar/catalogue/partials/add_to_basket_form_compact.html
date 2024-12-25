@@ -1,0 +1,30 @@
+{% load basket_tags %}
+{% load i18n %}
+{% load purchase_info_tags %}
+
+{% purchase_info_for_product request product as session %}
+
+{% if session.availability.is_available_to_buy and session.price.exists %}
+{% basket_form request product 'single' as basket_form %}
+<form action="{% url 'basket:add' pk=product.pk %}" method="post">
+
+    {% csrf_token %}
+    {{ basket_form.as_p }}
+    <div class="product-action">
+        <button type="submit" href="{{product.get_absolute_url}}" class="btn-product btn-cart" title="Add to Cart" data-loading-text="{% trans 'Adding...' %}">
+            <i class="w-icon-cart"></i>
+            
+            {% trans "Add to basket" %} 
+        </button>
+        <a href="#" class="btn-product-icon btn-wishlist w-icon-heart" title="Add to wishlist">
+    
+        </a>
+        <a href="#" class="btn-product-icon btn-compare w-icon-compare" title="Compare"></a>
+    </div>
+</form>
+{% else %}
+<button type="submit" href="{{product.get_absolute_url}}" class="btn-product btn-cart" title="Add to Cart" disabled>
+    <i class="w-icon-cart">
+    </i>{% trans "Add to basket" %}
+</button>
+{% endif %}

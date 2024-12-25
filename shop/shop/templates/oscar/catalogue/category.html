@@ -1,0 +1,98 @@
+{% extends "oscar/catalogue/browse.html" %}
+{% load i18n %}
+{% load static %}
+
+
+{% block breadcrumb %}
+
+<nav class="breadcrumb-nav">
+    <div class="container">
+        <ul class="breadcrumb bb-no">
+            <li><a href="{{ homepage_url }}">{% trans "Home" %}</a></li>
+            {% for category in category.get_ancestors %}
+            <li><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
+            {% endfor %}
+            <li><a href="shop-banner-sidebar.html">{{ category.name }}</a></li>
+
+        </ul>
+    </div>
+</nav>
+{% endblock %}
+
+
+{% block banner %}
+{% endblock %}
+
+
+
+{% block categories %}
+<div class="swiper-container swiper-theme " data-swiper-options="{
+     'spaceBetween': 20,
+     'slidesPerView': 1,
+     'breakpoints': {
+         '576': {
+             'slidesPerView': 2
+         },
+         '992': {
+             'slidesPerView': 3
+         }
+     }
+ }">
+    <div class="swiper-wrapper row cols-lg-3 cols-sm-2 cols-1">
+        {% for category in category.get_ancestors %}
+        <div class="swiper-slide category-wrap">
+            <div class="category category-absolute category-default overlay-zoom">
+                <a href="{{ category.get_absolute_url}}">
+                    {% if category.image %}
+                    <figure>
+                        <img src="{{category.image.url}}" alt="Category Banner" width="400"
+                            height="200" style="background-color: #423D39;">
+                    </figure>
+                    {% else %}
+                    
+                    <figure>
+                        <img src="{% static 'oscar/img/image_not_found.jpg' %}" alt="Category Banner" width="300"
+                            height="100" style="background-color: #423D39;">
+                    </figure>
+                    {% endif  %}
+                </a>
+
+                <div class="category-content y-50">
+                    <h4 class="category-title text-white font-weight-bolder">{{category.name }}</h4>
+                    <div class="category-count text-white">20 Products</div>
+                    <a href="{{ category.get_absolute_url}}" class="btn btn-white btn-link btn-underline">Shop Now</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="swiper-slide category-wrap">
+            <div class="category category-absolute category-default overlay-zoom">
+                <a href="{{ category.get_absolute_url}}">
+                    {% if category.image %}
+                    <figure>
+                        <img src="{{category.image.url}}" alt="Category Banner" width="400" height="200"
+                            style="background-color: #423D39;">
+                    </figure>
+                    {% else %}
+        
+                    <figure>
+                        <img src="{% static 'oscar/img/image_not_found.jpg' %}" alt="Category Banner" width="300" height="100"
+                            style="background-color: #423D39;">
+                    </figure>
+                    {% endif %}
+                </a>
+                <div class="category-content y-50">
+                    <h4 class="category-title text-white font-weight-bolder">{{category.name }}</h4>
+                    <div class="category-count text-white">20 Products</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="swiper-pagination"></div>
+</div>
+<br>
+{% endblock %}
+
+{% block layout %}
+{{block.super}}
+{% endblock %}

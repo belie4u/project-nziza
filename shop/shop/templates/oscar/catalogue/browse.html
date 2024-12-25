@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% load basket_tags %}
+{% load category_tags %}
+{% load product_tags %}
+{% load i18n %}
+{% load static %}
+
+
+{% block title %}
+{% if summary %}{{ summary }} |{% endif %} {{ block.super }}
+{% endblock %}
+
+{% block breadcrumb %}
+
+<nav class="breadcrumb-nav">
+    <div class="container">
+        <ul class="breadcrumb bb-no">
+            <li><a href="{{ homepage_url }}">{% trans "Home" %}</a></li>
+            <li><a href="shop-banner-sidebar.html">{{ summary }}</a></li>
+
+        </ul>
+    </div>
+</nav>
+
+{% endblock %}
+
+
+
+
+
+
+{% block banner %}
+<div class="shop-default-banner banner d-flex align-items-center mb-5 br-xs"
+    style="background-image: url({% static 'images/shop/banner1.jpg' %}); background-color: #FFC74E;">
+    <div class="banner-content">
+        <h4 class="banner-subtitle font-weight-bold">Accessories Collection</h4>
+        <h3 class="banner-title text-white text-uppercase font-weight-bolder ls-normal">Smart Wrist Watches</h3>
+
+        <a href="shop-banner-sidebar.html" class="btn btn-dark btn-rounded btn-icon-right">Discover Now<i
+                class="w-icon-long-arrow-right"></i></a>
+
+    </div>
+</div>
+{% endblock %}
+<!-- End of Shop Banner -->
+
+
+
+{% block toolbox %}
+<nav class="toolbox sticky-toolbox sticky-content fix-top sidebar-fixed">
+    <div class="toolbox-left">
+        <a href="#" class="btn btn-primary btn-outline btn-rounded left-sidebar-toggle 
+                                        btn-icon-left d-block d-lg-none"><i
+                class="w-icon-category"></i><span>Filters</span></a>
+        <div class="toolbox-item toolbox-sort select-box text-dark">
+            <label>Sort By:</label>
+            <form action="{{request.get_full_path}}" method="get">
+                {% csrf_token %}
+                <select name="orderby" class="form-control" onchange="location = this.value;">
+                    <option value="?sort_by=relevancy">RELEVANCY</option>
+                    <option value="?sort_by=rating">TOP RATED</option>
+                    <option value="?sort_by=newest">NEWEST</option>
+                    <option value="?sort_by=price-desc">PRICE HIGH TO LOW</option>
+                    <option value="?sort_by=price-asc">PRICE LOW TO HIGH</option>
+                    <option value="?sort_by=title-asc">TITLE A TO Z</option>
+                    <option value="?sort_by=title-desc">TITLE Z TO A</option>
+                </select>
+            </form>
+
+        </div>
+    </div>
+    <div class="toolbox-right">
+        <div class="toolbox-item toolbox-show select-box">
+
+            <form action="{{request.get_full_path}}" method="get">
+                {% csrf_token %}
+                <select id="view-option-limit" class="form-control form-control-sm" name="products_per_page"
+                    onchange="this.form.submit()">
+
+                    <option value="28" {% if request.GET.products_per_page == '28' %} selected {% endif %}>show 28</option>
+                    <option value="24" {% if request.GET.products_per_page == '24' %} selected {% endif %}>show 24</option>
+                    <option value="20" {% if request.GET.products_per_page == '20' %} selected {% endif %}>show 20</option>
+                    <option value="16" {% if request.GET.products_per_page == '16' %} selected {% endif %}>show 16</option>
+                    <option value="6" {% if request.GET.products_per_page  == '6' %} selected {% endif %}>  show 6</option>
+                </select>
+            </form>
+        </div>
+    </div>
+</nav>
+
+{% endblock %}
+{% block layout %}
+
+
+{% if products %}
+<div class="product-wrapper row cols-md-1 cols-xs-2 cols-1">
+    {% for product in products %}
+    {% render_product product %}
+    {% endfor %}
+</div>
+
+
+
+{% include "oscar/partials/paginator.html" %}
+{% else %}
+
+<div class="alert alert-primary alert-bg alert-button alert-block ">
+    <h4 class="alert-title">Sorry!</h4>
+    <p> no produt is found here
+    </p>
+    <a href="{{ homepage_url }}" class="btn btn-primary btn-rounded">return home </a>
+    <a href="#" class="btn btn-primary btn-rounded">Browse more categories</a>
+    <button class="btn btn-link btn-close" aria-label="button">
+        <i class="close-icon"></i>
+    </button>
+</div>
+
+{% endif %}
+{% endblock %}

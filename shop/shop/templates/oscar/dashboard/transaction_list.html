@@ -1,0 +1,64 @@
+{% extends 'oscar/dashboard/layout.html' %}
+{% load currency_filters %}
+{% load i18n %}
+
+{% block title %}
+{% trans "Razorpay transactions" %} | {{ block.super }}
+{% endblock %}
+
+{% block breadcrumbs %}
+<ul class="breadcrumb">
+    <li>
+        <a href="{% url 'dashboard:index' %}">{% trans "Dashboard" %}</a>
+        <span class="divider">/</span>
+    </li>
+    <li>
+        Razorpay <span class="divider">/</span>
+    </li>
+    <li class="active">{% trans "Razorpay transactions" %}</li>
+</ul>
+{% endblock %}
+
+{% block headertext %}
+{% trans "Razorpay transactions" %}
+{% endblock %}
+
+{% block dashboard_content %}
+
+{% if transactions %}
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>{% trans "Transaction ID" %}</th>
+            <th>{% trans "Status" %}</th>
+            <th>{% trans "Amount" %}</th>
+            <th>{% trans "Razorpay ID" %}</th>
+            <th>{% trans "Error code" %}</th>
+            <th>{% trans "Error message" %}</th>
+            <th>{% trans "Date" %}</th>
+            <th>{% trans "User" %}</th>
+            <th>{% trans "Email" %}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for txn in transactions %}
+        <tr>
+            <td><a href="{% url 'razor_pay_dashboard:razorpay-detail' txn.id %}">{{ txn.txnid }}</a></td>
+            <td>{{ txn.status }}</td>
+            <td>{{ txn.amount|currency:txn.currency }}</td>
+            <td>{{ txn.rz_id|default:"-" }}</td>
+            <td>{{ txn.error_code|default:'-' }}</td>
+            <td>{{ txn.error_message|default:'-' }}</td>
+            <td>{{ txn.date_created }}</td>
+            <td>{{ txn.user }}</td>
+            <td>{{ txn.email }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% include "oscar/partials/pagination.html" %}
+{% else %}
+<p>{% trans "No transactions have been made yet." %}</p>
+{% endif %}
+
+{% endblock dashboard_content %}

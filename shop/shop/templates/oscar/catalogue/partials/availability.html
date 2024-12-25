@@ -1,0 +1,21 @@
+{% load currency_filters %}
+{% load i18n %}
+{% load purchase_info_tags %}
+
+{% purchase_info_for_product request product as session %}
+
+
+
+{% if session.price.exists %}
+{% if verbose %}
+{{ session.availability.message }}
+{% else %}
+<div class="btn-wrap ">
+    <a href="/" class="btn btn-success btn-underline btn-link">{{ session.availability.short_message }}</a>
+</div>
+{% endif %}
+{% else %}
+<div class="btn-wrap ">
+    <a class="btn btn-primary btn-underline btn-link sm">{% trans 'Unavailable' %}</a>
+</div>
+{% endif %}

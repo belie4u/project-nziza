@@ -1,0 +1,15 @@
+#egnore env
+
+env
+
+#egnore database
+db.sqlite3
+
+#static
+
+static
+
+# sorl
+
+sorl-6.6.6
+
