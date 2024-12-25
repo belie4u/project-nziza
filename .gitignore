@@ -1,15 +1,18 @@
-#egnore env
+# Ignore env
+env/
 
-env
+# Ignore database
+db.sqlite3/
 
-#egnore database
-db.sqlite3
-
-#static
-
+# Ignore static files
 static
 
-# sorl
+# Ignore sorl
+sorl-6.6.6/
 
-sorl-6.6.6
+# Ignore Python cache files
+__pycache__/
+*.py[cod]
 
+# Ignore virtual environment
+venv/
