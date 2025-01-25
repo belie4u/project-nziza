@@ -1,0 +1,167 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+    <title>{% block title %}{% endblock %} {{ shop_name }}</title>
+
+    <meta name="keywords" content="Marketplace ecommerce responsive HTML5 Template" />
+    <meta name="description" content="Wolmart is powerful marketplace &amp; ecommerce responsive Html5 Template.">
+    <meta name="author" content="D-THEMES">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{% static 'images/icons/favicon.png' %}">
+
+    <!-- WebFont.js -->
+    <script>
+        WebFontConfig = {
+            google: { families: ['Poppins:400,500,600,700'] }
+        };
+        (function (d) {
+            var wf = d.createElement('script'), s = d.scripts[0];
+            wf.src = "{% static 'js/webfont.js' %}";
+            wf.async = true;
+            s.parentNode.insertBefore(wf, s);
+        })(document);
+    </script>
+
+    <link rel="preload" href="{% static 'vendor/fontawesome-free/webfonts/fa-regular-400.woff2' %}" as="font"
+        type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="{% static 'vendor/fontawesome-free/webfonts/fa-solid-900.woff2' %}" as="font"
+        type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="{% static 'vendor/fontawesome-free/webfonts/fa-brands-400.woff2' %}" as="font"
+        type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="{% static 'fonts/wolmart.woff' %}" as="font" type="font/woff" crossorigin="anonymous">
+
+    <!-- Vendor CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/fontawesome-free/css/all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/animate/animate.min.css' %}">
+
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="{% static 'vendor/swiper/swiper-bundle.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/nouislider/nouislider.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/magnific-popup/magnific-popup.min.css' %}">
+
+    <!-- Default CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.min.css' %}">
+</head>
+
+<body>
+    <div class="page-wrapper">
+        <h1 class="d-none">Wolmart - Responsive Marketplace HTML Template</h1>
+        <!-- Start of Header -->
+        {% include "components/header.html" %}
+        <!-- End of Header -->
+
+
+        <!-- Start of Main -->
+        <main class="main">
+            <!-- Start of Breadcrumb -->
+            {% block breadcrumb %}
+
+            {% endblock %}
+            <!-- End of Breadcrumb -->
+
+            <!-- Start of Page Content -->
+            <div class="page-content">
+
+                <div class="container">
+                    <!-- Start of Shop Banner -->
+                    {% block banner %}
+
+
+                    {% endblock %}
+                    <!-- End of Shop Banner -->
+
+                    <!-- Start of Shop Category -->
+                    {% block categories %}
+
+                    {% endblock %}
+                    <!-- End of Shop Category -->
+
+                    <!-- Start of Shop Content -->
+                    <div class="shop-content row gutter-lg mb-10">
+                        <!-- Start of Sidebar, Shop Sidebar -->
+                        
+                        <!-- End of Shop Sidebar -->
+
+                        <!-- Start of Shop Main Content -->
+                        
+                            {% block toolbox %}
+
+                            {% endblock %}
+
+                            {% block layout %}
+                            <div class="main-content">
+
+                            </div>
+                            {% endblock %}
+                        <!-- End of Shop Main Content -->
+                    </div>
+                    <!-- End of Shop Content -->
+                </div>
+            </div>
+            <!-- End of Page Content -->
+        </main>
+        <!-- End of Main -->
+
+        {% include "components/footer.html" %}
+        <!-- End of Footer -->
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Start of Sticky Footer -->
+    {% include "components/sticky_footer.html" %}
+    <!-- End of Sticky Footer -->
+    <!-- Start of Scroll Top -->
+    <a id="scroll-top" class="scroll-top" href="#top" title="Top" role="button"> <i class="w-icon-angle-up"></i> <svg
+            version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 70 70">
+            <circle id="progress-indicator" fill="transparent" stroke="#000000" stroke-miterlimit="10" cx="35" cy="35"
+                r="34" style="stroke-dasharray: 16.4198, 400;"></circle>
+        </svg> </a>
+    <!-- End of Scroll Top -->
+
+    <!-- Start of Mobile Menu -->
+    {% include "components/mobile_menu.html" %}
+    <!-- End of Mobile Menu -->
+
+    <!-- Plugin JS File -->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/sticky/sticky.js' %}"></script>
+    <script src="{% static 'vendor//jquery.plugin/jquery.plugin.min.js' %}"></script>
+    <script src="{% static 'vendor/swiper/swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'vendor/nouislider/nouislider.min.js' %}"></script>
+    <script src="{% static 'vendor/jquery.countdown/jquery.countdown.min.js' %}"></script>
+    <script src="{% static 'vendor/imagesloaded/imagesloaded.pkgd.min.js' %}"></script>
+    <script src="{% static 'vendor/zoom/jquery.zoom.js' %}"></script>
+    <script src="{% static 'vendor/magnific-popup/jquery.magnific-popup.min.js' %}"></script>
+    <script>
+        $(document).ready(function () {
+            $('#sort').on('change', function () {
+                var sortQuery = $(this).val(); // e.g., "?sort_by=rating"
+
+                $.ajax({
+                    type: 'GET',  // Using GET for query parameters
+                    url: window.location.pathname + sortQuery, // Append the query to the URL
+                    dataType: 'json',
+                    success: function (data) {
+                        $('.product-wrapper').html(data.sort_by_choice); // Replace product list with new sorted data
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Error:', error);
+                    }
+                });
+            });
+        });
+    </script>
+
+
+
+    <!-- Main JS -->
+    <script src="{% static 'js/main.min.js' %}"></script>
+</body>
+
+</html>
