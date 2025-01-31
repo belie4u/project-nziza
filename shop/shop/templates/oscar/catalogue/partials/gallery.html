@@ -1,0 +1,57 @@
+{% load static %}
+{% load image_tags %}
+
+<div class="product-gallery product-gallery-sticky">
+    {% with all_images=product.get_all_images %}
+    {% if all_images|length > 0 %}
+    <!-- Main Swiper Container for the large images -->
+    <div class="swiper-container product-single-swiper swiper-theme nav-inner" data-swiper-options='{
+                "navigation": {
+                    "nextEl": ".swiper-button-next",
+                    "prevEl": ".swiper-button-prev"
+                }
+            }'>
+        <div class="swiper-wrapper">
+            {% for image in all_images %}
+            <div class="swiper-slide">
+                {% oscar_thumbnail image.original "800x900" upscale=false as thumb %}
+                <figure class="product-image">
+                    <img src="{{ thumb.url }}" data-zoom-image="{{ image.original.url }}" alt="{{ product.get_title }}"
+                        width="800" height="900">
+                </figure>
+            </div>
+            {% endfor %}
+        </div>
+        <!-- Navigation buttons -->
+        <button class="swiper-button-next"></button>
+        <button class="swiper-button-prev"></button>
+        <!-- Fullscreen button -->
+        <a href="{{ all_images.0.original.url }}" class="product-gallery-btn product-image-full">
+            <i class="w-icon-zoom"></i>
+        </a>
+    </div>
+
+    <!-- Thumbnail Swiper Container -->
+    <div class="product-thumbs-wrap swiper-container" data-swiper-options='{
+                "navigation": {
+                    "nextEl": ".swiper-button-next",
+                    "prevEl": ".swiper-button-prev"
+                },
+                "slidesPerView": 4,
+                "spaceBetween": 10
+            }'>
+        <div class="product-thumbs swiper-wrapper">
+            {% for image in all_images %}
+            <div class="product-thumb swiper-slide">
+                {% oscar_thumbnail image.original "200x225" upscale=false as thumb %}
+                <img src="{{ thumb.url }}" alt="Product Thumb" width="200" height="225">
+            </div>
+            {% endfor %}
+        </div>
+        <!-- Navigation buttons -->
+        <button class="swiper-button-next"></button>
+        <button class="swiper-button-prev"></button>
+    </div>
+    {% endif %}
+    {% endwith %}
+</div>

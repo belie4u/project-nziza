@@ -3,6 +3,8 @@
 {% load category_tags %}
 {% load product_tags %}
 {% load i18n %}
+{% load reviews_tags %}
+{% load custom_filters %}
 {% load static %}
 
 
@@ -32,198 +34,33 @@
 <div class="main-content">
     <div class="product product-single row">
         <div class="col-md-6 mb-4 mb-md-8">
-            <div class="product-gallery product-gallery-sticky">
-                <div class="swiper-container product-single-swiper swiper-theme nav-inner" data-swiper-options="{
-                                            'navigation': {
-                                                'nextEl': '.swiper-button-next',
-                                                'prevEl': '.swiper-button-prev'
-                                            }
-                                        }">
-                    <div class="swiper-wrapper row cols-1 gutter-no">
-                        <div class="swiper-slide">
-                            <figure class="product-image">
-                                <img src="{% static 'images/products/swatch/1-800x900.jpg' %}"
-                                    data-zoom-image="{% static 'images/products/swatch/1-800x900.jpg' %}"
-                                    alt="Fashion Table Sound Marker" width="800" height="900">
-                            </figure>
-                        </div>
-                        <div class="swiper-slide">
-                            <figure class="product-image">
-                                <img src="{% static 'images/products/swatch/2-800x900.jpg' %}"
-                                    data-zoom-image="{% static 'images/products/swatch/2-800x900.jpg' %}"
-                                    alt="Fashion Table Sound Marker" width="488" height="549">
-                            </figure>
-                        </div>
-                        <div class="swiper-slide">
-                            <figure class="product-image">
-                                <img src="{% static 'images/products/swatch/3-800x900.jpg' %}"
-                                    data-zoom-image="{% static 'images/products/swatch/3-800x900.jpg' %}"
-                                    alt="Fashion Table Sound Marker" width="800" height="900">
-                            </figure>
-                        </div>
-                        <div class="swiper-slide">
-                            <figure class="product-image">
-                                <img src="{% static 'images/products/swatch/4-800x900.jpg' %}"
-                                    data-zoom-image="{% static 'images/products/swatch/4-800x900.jpg' %}"
-                                    alt="Fashion Table Sound Marker" width="800" height="900">
-                            </figure>
-                        </div>
-                        <div class="swiper-slide">
-                            <figure class="product-image">
-                                <img src="{% static 'images/products/swatch/5-800x900.jpg' %}"
-                                    data-zoom-image="{% static 'images/products/swatch/5-800x900.jpg' %}"
-                                    alt="Fashion Table Sound Marker" width="800" height="900">
-                            </figure>
-                        </div>
-                        <div class="swiper-slide">
-                            <figure class="product-image">
-                                <img src="{% static 'images/products/swatch/6-800x900.jpg' %}"
-                                    data-zoom-image="{% static 'images/products/swatch/6-800x900.jpg' %}"
-                                    alt="Fashion Table Sound Marker" width="488" height="549">
-                            </figure>
-                        </div>
-                        <div class="swiper-slide">
-                            <figure class="product-image">
-                                <img src="{% static 'images/products/swatch/7-800x900.jpg' %}"
-                                    data-zoom-image="{% static 'images/products/swatch/7-800x900.jpg' %}"
-                                    alt="Fashion Table Sound Marker" width="800" height="900">
-                            </figure>
-                        </div>
-                        <div class="swiper-slide">
-                            <figure class="product-image">
-                                <img src="{% static 'images/products/swatch/8-800x900.jpg' %}"
-                                    data-zoom-image="{% static 'images/products/swatch/8-800x900.jpg' %}"
-                                    alt="Fashion Table Sound Marker" width="800" height="900">
-                            </figure>
-                        </div>
-                        <div class="swiper-slide">
-                            <figure class="product-image">
-                                <img src="{% static 'images/products/swatch/9-800x900.jpg' %}"
-                                    data-zoom-image="{% static 'images/products/swatch/9-800x900.jpg' %}"
-                                    alt="Fashion Table Sound Marker" width="800" height="900">
-                            </figure>
-                        </div>
-                        <div class="swiper-slide">
-                            <figure class="product-image">
-                                <img src="{% static 'images/products/swatch/10-800x900.jpg' %}"
-                                    data-zoom-image="{% static 'images/products/swatch/10-800x900.jpg' %}"
-                                    alt="Fashion Table Sound Marker" width="800" height="900">
-                            </figure>
-                        </div>
-                        <div class="swiper-slide">
-                            <figure class="product-image">
-                                <img src="{% static 'images/products/swatch/11-800x900.jpg' %}"
-                                    data-zoom-image="{% static 'images/products/swatch/11-800x900.jpg' %}"
-                                    alt="Fashion Table Sound Marker" width="800" height="900">
-                            </figure>
-                        </div>
-                        <div class="swiper-slide">
-                            <figure class="product-image">
-                                <img src="{% static 'images/products/swatch/12-800x900.jpg' %}"
-                                    data-zoom-image="{% static 'images/products/swatch/12-800x900.jpg' %}"
-                                    alt="Fashion Table Sound Marker" width="488" height="549">
-                            </figure>
-                        </div>
-                        <div class="swiper-slide">
-                            <figure class="product-image">
-                                <img src="{% static 'images/products/swatch/13-800x900.jpg' %}"
-                                    data-zoom-image="{% static 'images/products/swatch/13-800x900.jpg' %}"
-                                    alt="Fashion Table Sound Marker" width="800" height="900">
-                            </figure>
-                        </div>
-                        <div class="swiper-slide">
-                            <figure class="product-image">
-                                <img src="{% static 'images/products/swatch/14-800x900.jpg' %}"
-                                    data-zoom-image="{% static 'images/products/swatch/14-800x900.jpg' %}"
-                                    alt="Fashion Table Sound Marker" width="800" height="900">
-                            </figure>
-                        </div>
-                    </div>
-                    <button class="swiper-button-next"></button>
-                    <button class="swiper-button-prev"></button>
-                    <a href="#" class="product-gallery-btn product-image-full"><i class="w-icon-zoom"></i></a>
-                </div>
-                <div class="product-thumbs-wrap swiper-container" data-swiper-options="{
-                                            'navigation': {
-                                                'nextEl': '.swiper-button-next',
-                                                'prevEl': '.swiper-button-prev'
-                                            }
-                                        }">
-                    <div class="product-thumbs swiper-wrapper row cols-4 gutter-sm">
-                        <div class="product-thumb swiper-slide">
-                            <img src="{% static 'images/products/swatch/1-800x900.jpg' %}" alt="Product Thumb" width="800"
-                                height="900">
-                        </div>
-                        <div class="product-thumb swiper-slide">
-                            <img src="{% static 'images/products/swatch/2-800x900.jpg' %}" alt="Product Thumb" width="800"
-                                height="900">
-                        </div>
-                        <div class="product-thumb swiper-slide">
-                            <img src="{% static 'images/products/swatch/3-800x900.jpg' %}" alt="Product Thumb" width="800"
-                                height="900">
-                        </div>
-                        <div class="product-thumb swiper-slide">
-                            <img src="{% static 'images/products/swatch/4-800x900.jpg' %}" alt="Product Thumb" width="800"
-                                height="900">
-                        </div>
-                        <div class="product-thumb swiper-slide">
-                            <img src="{% static 'images/products/swatch/5-800x900.jpg' %}" alt="Product Thumb" width="800"
-                                height="900">
-                        </div>
-                        <div class="product-thumb swiper-slide">
-                            <img src="{% static 'images/products/swatch/6-800x900.jpg' %}" alt="Product Thumb" width="800"
-                                height="900">
-                        </div>
-                        <div class="product-thumb swiper-slide">
-                            <img src="{% static 'images/products/swatch/7-800x900.jpg' %}" alt="Product Thumb" width="800"
-                                height="900">
-                        </div>
-                        <div class="product-thumb swiper-slide">
-                            <img src="{% static 'images/products/swatch/8-800x900.jpg' %}" alt="Product Thumb" width="800"
-                                height="900">
-                        </div>
-                        <div class="product-thumb swiper-slide">
-                            <img src="{% static 'images/products/swatch/9-800x900.jpg' %}" alt="Product Thumb" width="800"
-                                height="900">
-                        </div>
-                        <div class="product-thumb swiper-slide">
-                            <img src="{% static 'images/products/swatch/10-800x900.jpg' %}" alt="Product Thumb" width="800"
-                                height="900">
-                        </div>
-                        <div class="product-thumb swiper-slide">
-                            <img src="{% static 'images/products/swatch/11-800x900.jpg' %}" alt="Product Thumb" width="800"
-                                height="900">
-                        </div>
-                        <div class="product-thumb swiper-slide">
-                            <img src="{% static 'images/products/swatch/12-800x900.jpg' %}" alt="Product Thumb" width="800"
-                                height="900">
-                        </div>
-                        <div class="product-thumb swiper-slide">
-                            <img src="{% static 'images/products/swatch/13-800x900.jpg' %}" alt="Product Thumb" width="800"
-                                height="900">
-                        </div>
-                        <div class="product-thumb swiper-slide">
-                            <img src="{% static 'images/products/swatch/14-800x900.jpg' %}" alt="Product Thumb" width="800"
-                                height="900">
-                        </div>
-                    </div>
-                    <button class="swiper-button-next"></button>
-                    <button class="swiper-button-prev"></button>
-                </div>
-            </div>
+            {% include "oscar/catalogue/partials/gallery.html" %}
         </div>
         <div class="col-md-6 mb-6 mb-md-8">
             <div class="product-details" data-sticky-options="{'minWidth': 767}">
-                <h1 class="product-title">Fashion Table Sound Marker</h1>
+                <h1 class="product-title">{{ product.get_title }}</h1>
                 <div class="product-bm-wrapper">
                     <figure class="brand">
                         <img src="{% static 'images/products/brand/brand-6.jpg' %}" alt="Brand" width="85" height="48" />
                     </figure>
                     <div class="product-meta">
+                        
                         <div class="product-categories">
                             Category:
-                            <span class="product-category"><a href="#">Electronics</a></span>
+                            <span class="product-category">
+                                {% with category=product.get_categories.first %}
+                                {% for c in category.get_ancestors_and_self %}
+                                {% if forloop.first %}
+                                <strong>{{ forloop.counter }}. </strong>
+                                {% else %}
+                                <strong>{{ forloop.counter }}. </strong>
+                                {% endif %}
+                                <a href="#">{{ c.name }}</a>
+                                {% endfor %}
+                                {% endwith %}
+                            </span>
                         </div>
+
                         <div class="product-sku">
                             SKU: <span>MS46891342</span>
                         </div>
@@ -236,10 +73,40 @@
 
                 <div class="ratings-container">
                     <div class="ratings-full">
-                        <span class="ratings" style="width: 80%;"></span>
+                        <span class="ratings"
+                            style="width: {% if product.rating is not None %}{{ product.rating|default:0|floatformat:1|add:'0'|floatformat|multiply:20 }}%{% else %}0%{% endif %};">
+                
+                        </span>
                         <span class="tooltiptext tooltip-top"></span>
                     </div>
-                    <a href="#product-tab-reviews" class="rating-reviews">(3 Reviews)</a>
+                    <a href="{{product.get_absolute_url}}" class="rating-reviews">
+                        {% if product.rating != None %}
+                        {{ product.rating|default:0|floatformat:0 }} on {{ product.num_approved_reviews|default:0 }} reviews
+                        {% else %}
+                        0 reviews
+                        {% endif %}
+                    </a>
+                </div>
+                <div class="product-card__rating">
+                    <div class="rating product-card__rating-stars">
+                        <div class="rating__body">
+                            {% if product.rating != None %}
+                            {% for _ in product.rating|default:0|get_range %}
+                            <div class="rating__star rating__star--active"></div>
+                            {% endfor %}
+                            {% for _ in product.rating|default:0|get_range:5 %}
+                            <div class="rating__star"></div>
+                            {% endfor %}
+                            {% else %}
+                            {% for _ in "x"|rjust:5 %}
+                            <div class="rating__star"></div>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="product-card__rating-label">
+                        {% include "oscar/catalogue/partials/availability.html" %}
+                    </div>
                 </div>
 
                 <div class="product-short-desc">
@@ -252,19 +119,7 @@
 
                 <hr class="product-divider">
 
-                <div class="product-form product-variation-form product-image-swatch">
-                    <label>Color:</label>
-                    <div class="d-flex align-items-center product-variations">
-                        <a href="#" class="image"><img src="{% static 'images/products/swatch/1-800x900.jpg' %}"
-                                alt="Product Swatch" width="24" height="24" /></a>
-                        <a href="#" class="image"><img src="{% static 'images/products/swatch/7-800x900.jpg' %}"
-                                alt="Product Swatch" width="24" height="24" /></a>
-                        <a href="#" class="image"><img src="{% static 'images/products/swatch/8-800x900.jpg' %}"
-                                alt="Product Swatch" width="24" height="24" /></a>
-                        <a href="#" class="image"><img src="{% static 'images/products/swatch/14-800x900.jpg' %}"
-                                alt="Product Swatch" width="24" height="24" /></a>
-                    </div>
-                </div>
+                
                 <div class="product-form product-variation-form product-size-swatch">
                     <label class="mb-1">Size:</label>
                     <div class="flex-wrap d-flex align-items-center product-variations">
