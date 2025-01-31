@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "wagtail.embeds",
     "wagtail.sites",
     "wagtail.users",
+    "wagtail.search",
     "wagtail.snippets",
     "wagtail.documents",
     "wagtail.images",
@@ -144,6 +145,8 @@ TEMPLATES = [
     },
 ]
 
+
+
 WSGI_APPLICATION = "shop.wsgi.application"
 
 
@@ -156,8 +159,13 @@ DATABASES = {
         "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
     }
 }
+WAGTAILSEARCH_BACKENDS = {
+    "default": {
+        "BACKEND": "wagtail.search.backends.database",
+    }
+}
 
-
+HAYSTACK_CONNECTIONS = {"default": {}}
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
@@ -244,14 +252,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 
-HAYSTACK_CONNECTIONS = {
-    'default': {
-        'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
-        'URL': 'http://127.0.0.1:8983/solr/NZIZASHOP',
-        'ADMIN_URL': 'http://127.0.0.1:8983/solr/admin/cores',
-        'INCLUDE_SPELLING': True,
-    },
-}
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -456,3 +457,6 @@ OSCAR_LINE_STATUS_PIPELINE = {
     'Being processed': ('Processed', 'Cancelled',),
     'Cancelled': (),
 }
+
+
+
