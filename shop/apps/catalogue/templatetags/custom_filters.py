@@ -1,4 +1,5 @@
 from django import template
+from oscar.apps.partner.models import StockRecord
 
 register = template.Library()
 
@@ -17,3 +18,15 @@ def multiply(value, arg):
         return float(value) * float(arg)
     except (ValueError, TypeError):
         return 0
+    
+
+@register.simple_tag
+def get_stock_record(product):
+
+    stock_record = StockRecord.objects.filter(product=product).first()
+    if stock_record:
+        return {
+            "partner": stock_record.partner.name,
+            "sku": stock_record.partner_sku
+        }
+    return None
