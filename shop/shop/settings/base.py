@@ -63,7 +63,7 @@ INSTALLED_APPS = [
     'oscar.apps.communication.apps.CommunicationConfig',
     'oscar.apps.partner.apps.PartnerConfig',
 
-    'oscar.apps.basket.apps.BasketConfig',
+    'apps.basket.apps.BasketConfig',
     'oscar.apps.payment.apps.PaymentConfig',
     'oscar.apps.offer.apps.OfferConfig',
     'oscar.apps.order.apps.OrderConfig',
@@ -84,8 +84,8 @@ INSTALLED_APPS = [
     'oscar.apps.dashboard.vouchers.apps.VouchersDashboardConfig',
     'oscar.apps.dashboard.communications.apps.CommunicationsDashboardConfig',
     'oscar.apps.dashboard.shipping.apps.ShippingDashboardConfig',
-    'apps.razor_pay.apps.RazorPayConfig',
-    'apps.razor_pay.rz_dashboard.apps.RzDashboardConfig',
+    # 'apps.razor_pay.apps.RazorPayConfig',
+    # 'apps.razor_pay.rz_dashboard.apps.RzDashboardConfig',
     
     
 
@@ -205,12 +205,14 @@ STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 ]
 
+
 STATICFILES_DIRS = [
-    os.path.join(PROJECT_DIR, "static"),
+    # Should correctly resolve to D:\version\NZIZA SHOP\shop\static
+    os.path.join(PROJECT_DIR,  "static"),
 ]
 
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = "/static/"
+STATIC_ROOT = os.path.join(PROJECT_DIR, "staticfiles")  # For collectstatic
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
@@ -379,16 +381,16 @@ OSCAR_DASHBOARD_NAVIGATION = [
         "icon": "fas fa-chart-bar",
         "url_name": "dashboard:reports-index",
     },
-    {
-        'label': _('Razorpay'),
-        'icon': 'icon-globe',
-        'children': [
-            {
-                'label': _('Razorpay transactions'),
-                'url_name': 'razor_pay_dashboard:razorpay-list',
-            },
-        ]
-    }
+    # {
+    #     'label': _('Razorpay'),
+    #     'icon': 'icon-globe',
+    #     'children': [
+    #         {
+    #             'label': _('Razorpay transactions'),
+    #             'url_name': 'razor_pay_dashboard:razorpay-list',
+    #         },
+    #     ]
+    # }
     
 ]
 

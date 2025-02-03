@@ -14,9 +14,9 @@ urlpatterns = [
     path("admin/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
     # Razorpay integration...
-    path('checkout/razorpay/', include('apps.razor_pay.urls')),
-    path('dashboard/razor_pay/',
-         apps.get_app_config('rz_dashboard').urls),
+    # path('checkout/razorpay/', include('apps.razor_pay.urls')),
+    # path('dashboard/razor_pay/',
+    #      apps.get_app_config('rz_dashboard').urls),
          
     
     path('', include(apps.get_app_config('oscar').urls[0])),

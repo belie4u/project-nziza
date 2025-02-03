@@ -5,6 +5,8 @@
 {% load i18n %}
 {% load reviews_tags %}
 {% load custom_filters %}
+{% load purchase_info_tags %}
+{% load currency_filters %}
 {% load static %}
 
 
@@ -69,10 +71,11 @@
 
                     </div>
                 </div>
-
+                {% purchase_info_for_product request product as session %}
                 <hr class="product-divider">
-
-                <div class="product-price">$30.00 - $40.00</div>
+                {% if session.price.exists and not product.is_parent %}
+                <div class="product-price">{{ session.price.excl_tax|currency:session.price.currency}}</div>
+                {% endif %}
 
                 <div class="ratings-container">
                     <div class="ratings-full">
@@ -123,53 +126,13 @@
                 <hr class="product-divider">
 
                 
-                <div class="product-form product-variation-form product-size-swatch">
-                    <label class="mb-1">Size:</label>
-                    <div class="flex-wrap d-flex align-items-center product-variations">
-                        <a href="#" class="size">Small</a>
-                        <a href="#" class="size">Medium</a>
-                        <a href="#" class="size">Large</a>
-                        <a href="#" class="size">Extra Large</a>
-                    </div>
-                    <a href="#" class="product-variation-clean">Clean All</a>
-                </div>
+                
 
-                <div class="product-variation-price">
-                    <span></span>
-                </div>
+                {% if not product.is_parent %}
+                {% include "oscar/catalogue/partials/add_to_basket_form.html" %}
+                {% endif %}
 
-                <div class="fix-bottom product-sticky-content sticky-content">
-                    <div class="product-form container">
-                        <div class="product-qty-form">
-                            <div class="input-group">
-                                <input class="quantity form-control" type="number" min="1" max="10000000">
-                                <button class="quantity-plus w-icon-plus"></button>
-                                <button class="quantity-minus w-icon-minus"></button>
-                            </div>
-                        </div>
-                        <button class="btn btn-primary btn-cart">
-                            <i class="w-icon-cart"></i>
-                            <span>Add to Cart</span>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="social-links-wrapper">
-                    <div class="social-links">
-                        <div class="social-icons social-no-color border-thin">
-                            <a href="#" class="social-icon social-facebook w-icon-facebook"></a>
-                            <a href="#" class="social-icon social-twitter w-icon-twitter"></a>
-                            <a href="#" class="social-icon social-pinterest fab fa-pinterest-p"></a>
-                            <a href="#" class="social-icon social-whatsapp fab fa-whatsapp"></a>
-                            <a href="#" class="social-icon social-youtube fab fa-linkedin-in"></a>
-                        </div>
-                    </div>
-                    <span class="divider d-xs-show"></span>
-                    <div class="product-link-wrapper d-flex">
-                        <a href="#" class="btn-product-icon btn-wishlist w-icon-heart"><span></span></a>
-                        <a href="#" class="btn-product-icon btn-compare btn-icon-left w-icon-compare"><span></span></a>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </div>
